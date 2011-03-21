@@ -75,8 +75,8 @@ structure which has that text as the key in the parent. <strong>e.g.:</strong></
     <span class="p">},</span>
     </pre></div>             </td>           </tr>                               <tr id="section-8">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-8">&#182;</a>               </div>               <h3>Configure Headers</h3>
 
-<p>Manipulate the headers that are sent to your API using these methods. 
-They are designed to mimic the node.js core APIs to some level.</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">setHeaders</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">headers</span><span class="p">)</span> <span class="p">{</span>
+<p>Manipulate the HTTP headers that are sent to your API using these methods. 
+They are designed to mimic the node.js core HTTP APIs.</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">setHeaders</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">headers</span><span class="p">)</span> <span class="p">{</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">options</span><span class="p">.</span><span class="nx">headers</span> <span class="o">=</span> <span class="nx">headers</span><span class="p">;</span>
       <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
     <span class="p">},</span>
@@ -90,9 +90,9 @@ They are designed to mimic the node.js core APIs to some level.</p>             
     <span class="p">},</span>
     </pre></div>             </td>           </tr>                               <tr id="section-9">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-9">&#182;</a>               </div>               <h3>Manipulate Base Path</h3>
 
-<p>Control the base path used by a given suite. Append a path
-by calling <code>.path()</code>. Remove the last <code>num</code> paths from the 
-suite by calling <code>.unpath(num)</code>. Set the root path using <code>.root(path)</code> </p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">path</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">uri</span><span class="p">)</span> <span class="p">{</span>
+<p>Control the base path used for a given test in this suite. Append a path
+by calling <code>.path()</code>. Remove the last <code>num</code> paths from the suite by calling 
+<code>.unpath(num)</code>. Set the root path using <code>.root(path)</code> </p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">path</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">uri</span><span class="p">)</span> <span class="p">{</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">paths</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">uri</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/^\/|\/$/ig</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">));</span>
       <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
     <span class="p">},</span>
@@ -105,15 +105,16 @@ suite by calling <code>.unpath(num)</code>. Set the root path using <code>.root(
       <span class="k">this</span><span class="p">.</span><span class="nx">path</span> <span class="o">=</span> <span class="p">[</span><span class="nx">path</span><span class="p">];</span>
       <span class="k">return</span> <span class="k">this</span><span class="p">;</span>
     <span class="p">},</span>
-    </pre></div>             </td>           </tr>                               <tr id="section-10">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-10">&#182;</a>               </div>               <h3>Perform HTTP Requests in Tests</h3>
+    </pre></div>             </td>           </tr>                               <tr id="section-10">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-10">&#182;</a>               </div>               <h3>Add HTTP Request-based Tests</h3>
 
 <p>The <code>.get()</code>, <code>.post()</code>, <code>.put()</code>, <code>.del()</code>, and <code>.head()</code> 
-methods add a new topic to the vows structure maintained by this
-RESTeasy suite. The nuts and bolts of this are in the "private"
+methods add a new context and topic to the vows structure maintained
+by this RESTeasy suite. The nuts and bolts of this are in the "private"
 method <code>_request()</code>.</p>
 
 <p>Each method invocation returns the suite itself so that 
-<code>.expect()</code> and other setup methods can be called afterwards.</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">get</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="cm">/* [uri, params] */</span><span class="p">)</span> <span class="p">{</span>
+<code>.expect()</code> and other assertion method(s) can be called 
+afterwards to add assertions to this context.</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">get</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="cm">/* [uri, params] */</span><span class="p">)</span> <span class="p">{</span>
       <span class="kd">var</span> <span class="nx">args</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">arguments</span><span class="p">);</span>
       <span class="nx">args</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
       <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_request</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;get&#39;</span><span class="p">].</span><span class="nx">concat</span><span class="p">(</span><span class="nx">args</span><span class="p">));</span>
@@ -194,9 +195,14 @@ suite. Not quite sure the best approach here. <strong>cloudhead?</strong></p>
 
 <p>Since this object literal is designed to manage a single vows suite, 
 we need a way to add multiple batches to that suite for performing
-sequential tests. This is precisely what <code>.next()</code> does. It will take
-add the object representing the current batch (or 'vows') and add it to the 
-suite and reset the context for the <code>this.current</code> test. </p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">next</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">reset</span><span class="p">)</span> <span class="p">{</span>
+sequential tests. This is precisely what <code>.next()</code> does. It will:</p>
+
+<ol>
+<li>Add the current batch (or 'vows'), <code>this.batch</code>, to the vows suite</li>
+<li>Add this same batch to the set of batches on <code>this.batches</code></li>
+<li>Create a new empty object literal to use for <code>this.batch</code>.</li>
+<li>Reset the context for the <code>this.current</code> test. </li>
+</ol>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">next</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">reset</span><span class="p">)</span> <span class="p">{</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">suite</span><span class="p">.</span><span class="nx">addBatch</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">batch</span><span class="p">);</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">batches</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">batch</span><span class="p">);</span>
       <span class="k">this</span><span class="p">.</span><span class="nx">batch</span> <span class="o">=</span> <span class="p">{};</span>

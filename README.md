@@ -20,7 +20,7 @@ RESTeasy is designed to be a simple way to test RESTful APIs in [node.js][0] and
 ## Getting Started
 Most of the documentation for this library is available through the [annotated source code, available here][1] thanks to [jashkenas][2] and [docco][3]. If you're not feeling up for that, just keep reading here. 
 
-If you're going to use RESTeasy (and I hope you do), it's worth taking a moment to understand the way that [vows][4] manages flow control. 
+If you're going to use RESTeasy (and I hope you do), it's worth taking a moment to understand the way that [vows][4] manages flow control. Read up here on [vowsjs.org][5].
 
 Got it? Good. There is a 1-to-1 relationship between a RESTeasy suite and a vows suite; RESTeasy is essentially a simpler syntax to manage a particular set of vows-based tests that conform to this pattern:
 
@@ -81,7 +81,7 @@ This same code can be implemented like this using RESTeasy:
          .expect(200, { ok: true })
          .expect('should respond with x-test-header', function (err, res, body) {
            assert.include(res.headers, 'x-test-header');
-         })
+         });
 </pre>
 
 ## Roadmap
@@ -90,8 +90,16 @@ This same code can be implemented like this using RESTeasy:
 2. Improve it.
 3. Repeat (1) + (2).
 
+## Run Tests
+<pre>
+  vows test/*-test.js --spec
+</pre>
+
+#### Author: [Charlie Robbins](http://nodejitsu.com)
+
 [0]: http://nodejs.org
 [1]: http://indexzero.github.com/rest-easy
 [2]: http://github.com/jashkenas
 [3]: http://github.com/jashkenas/docco
 [4]: http://vowsjs.org
+[5]: http://vowsjs.org/#-structure-of-a-test-suite
