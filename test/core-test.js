@@ -20,7 +20,7 @@ vows.describe('rest-easy/core').addBatch({
     topic: restEasy.describe('test/api').discuss('When using the Test API'),
     "it should have the correct methods set": function () {
       assert.isFunction(restEasy.describe);
-      assert.length(Object.keys(restEasy), 1);
+      assert.length(Object.keys(restEasy), 2);
     },
     "and a valid suite": {
       "it should have the correct methods set": function (suite) {
