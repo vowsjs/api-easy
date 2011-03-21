@@ -13,7 +13,7 @@ var vows = require('vows'),
     restEasy = require('rest-easy'),
     helpers = require('./helpers');
 
-var scopes = ['When using the Test API', 'the Foo Resource'];
+var scopes = ['When using the Test API', 'the Test Resource'];
 
 vows.describe('rest-easy/core').addBatch({
   "When using RESTeasy": {
@@ -23,24 +23,65 @@ vows.describe('rest-easy/core').addBatch({
       assert.length(Object.keys(restEasy), 1);
     },
     "and a valid suite": {
-      topic: function (suite) {
-        return suite.discuss('the Foo Resource')
-          .use('localhost', 8080)
-          .setHeaders({ 'Content-Type': 'application/json' })
-          .path('/tests');
-      },
       "it should have the correct methods set": function (suite) {
         ['discuss', 'use', 'setHeaders', 'path', 'unpath', 'root', 'get', 'put', 
           'post', 'del', 'expect', 'next', 'export', '_request', '_currentTest'].forEach(function (key) {
           assert.isFunction(suite[key]);
         });
       },
+      "the discuss() method": {
+        "should append the text to the suite's discussion": function (suite) {
+          var length = suite.discussion.length;
+          suite.discuss('the Test Resource')
+               .discuss('and something else worth mentioning');
+          
+          assert.length(suite.discussion, length + 2);
+        }
+      },
+      "the undiscuss() method": {
+        "should remove the last discussion text": function (suite) {
+          var length = suite.discussion.length;
+          suite.undiscuss();
+          
+          assert.length(suite.discussion, length - 1);
+        }
+      },
+      "the use() method": {
+        "should set the appropriate options": function (suite) {
+          suite.use('localhost', 8080);
+          assert.equal(suite.host, 'localhost');
+          assert.equal(suite.port, 8080);
+        }
+      },
+      "the setHeader() method": {
+        "should set the header appropriately": function (suite) {
+          var length = Object.keys(suite.options.headers).length;
+          suite.setHeader('x-test-header', true);
+          assert.length(Object.keys(suite.options.headers), length + 1);
+        }
+      },
+      "the removeHeader() method": {
+        "should remove the header appropriately": function (suite) {
+          var length = Object.keys(suite.options.headers).length;
+          suite.removeHeader('x-test-header');
+          assert.length(Object.keys(suite.options.headers), length - 1);
+        }
+      },
+      "the setHeaders() method": {
+        "should set all headers appropriately": function (suite) {
+          suite.setHeader('x-test-header', true);
+          suite.setHeaders({ 'Content-Type': 'application/json' });
+          assert.length(Object.keys(suite.options.headers), 1);
+          assert.equal(suite.options.headers['Content-Type'], 'application/json');
+        }
+      },
       "the path() method": {
         "should append the path to the suite": function (suite) {
+          suite.path('/tests');
           var length = suite.paths.length;
           suite.path('/more-tests');
           assert.length(suite.paths, length + 1);
-          assert.equal('/more-tests', suite.paths[suite.paths.length - 1]);
+          assert.equal('more-tests', suite.paths[suite.paths.length - 1]);
         }
       },
       "the unpath() method": {
@@ -84,6 +125,66 @@ vows.describe('rest-easy/core').addBatch({
           },
           "should have the correct options": helpers.assertOptions(scopes, 'A GET to /tests/path-test?foo=1&bar=2', {
             uri: 'http://localhost:8080/tests/path-test?foo=1&bar=2',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            length: 2
+          })
+        }
+      },
+      "A POST test": {
+        "with no path": {
+          topic: function (suite) {
+            return suite.post().expect(201).batch;
+          },
+          "should have the correct options": helpers.assertOptions(scopes, 'A POST to /tests', {
+            uri: 'http://localhost:8080/tests',
+            method: 'post',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            length: 2
+          })
+        },
+        "with no path and a request body": {
+          topic: function (suite) {
+            return suite.post({ test: 'data' })
+                        .expect(201).batch;
+          },
+          "should have the correct options": helpers.assertOptions(scopes, 'A POST to /tests', {
+            uri: 'http://localhost:8080/tests',
+            method: 'post',
+            body: JSON.stringify({ test: 'data' }),
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            length: 2
+          })
+        },
+        "with no path, a request body, and params": {
+          topic: function (suite) {
+            return suite.post({ test: 'data' }, { foo: 1, bar: 2 })
+                        .expect(201).batch;
+          },
+          "should have the correct options": helpers.assertOptions(scopes, 'A POST to /tests?foo=1&bar=2', {
+            uri: 'http://localhost:8080/tests?foo=1&bar=2',
+            method: 'post',
+            body: JSON.stringify({ test: 'data' }),
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            length: 2
+          })
+        },
+        "with a path, request body, and params": {
+          topic: function (suite) {
+            return suite.post('create', { test: 'data' }, { foo: 1, bar: 2 })
+                        .expect(201).batch;
+          },
+          "should have the correct options": helpers.assertOptions(scopes, 'A POST to /tests/create?foo=1&bar=2', {
+            uri: 'http://localhost:8080/tests/create?foo=1&bar=2',
+            method: 'post',
+            body: JSON.stringify({ test: 'data' }),
             headers: {
               'Content-Type': 'application/json'
             },
