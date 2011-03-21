@@ -20,7 +20,7 @@ RESTeasy is designed to be a simple way to test RESTful APIs in [node.js][0] and
 ## Getting Started
 Most of the documentation for this library is available through the [annotated source code, available here][1] thanks to [jashkenas][2] and [docco][3]. If you're not feeling up for that, just keep reading here. 
 
-If you're going to use RESTeasy (and I hope you do), it's worth taking a moment to understand the way that [vows][4] manages flow control. Read up here on [vowsjs.org][5], or just remember vows uses this grammatical structure:
+If you're going to use RESTeasy (and I hope you do), it's worth taking a moment to understand the way that [vows][4] manages flow control. Read up here on [vowsjs][4] (Under "Structure of a test suite"), or just remember vows uses this grammatical structure:
 
 <pre>
   Suite   → Batch*
@@ -92,7 +92,7 @@ This same code can be implemented like this using RESTeasy:
 
 ## Roadmap
 
-1. [Get feedback][3] on what else could be exposed through this library.
+1. [Get feedback][5] on what else could be exposed through this library.
 2. Improve it.
 3. Repeat (1) + (2).
 
@@ -108,4 +108,4 @@ This same code can be implemented like this using RESTeasy:
 [2]: http://github.com/jashkenas
 [3]: http://github.com/jashkenas/docco
 [4]: http://vowsjs.org
-[5]: http://vowsjs.org/#-structure-of-a-test-suite
+[5]: http://github.com/indexzero/rest-easy/issues
