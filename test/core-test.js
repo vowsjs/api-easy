@@ -55,24 +55,24 @@ vows.describe('rest-easy/core').addBatch({
       },
       "the setHeader() method": {
         "should set the header appropriately": function (suite) {
-          var length = Object.keys(suite.options.headers).length;
+          var length = Object.keys(suite.outgoing.headers).length;
           suite.setHeader('x-test-header', true);
-          assert.length(Object.keys(suite.options.headers), length + 1);
+          assert.length(Object.keys(suite.outgoing.headers), length + 1);
         }
       },
       "the removeHeader() method": {
         "should remove the header appropriately": function (suite) {
-          var length = Object.keys(suite.options.headers).length;
+          var length = Object.keys(suite.outgoing.headers).length;
           suite.removeHeader('x-test-header');
-          assert.length(Object.keys(suite.options.headers), length - 1);
+          assert.length(Object.keys(suite.outgoing.headers), length - 1);
         }
       },
       "the setHeaders() method": {
         "should set all headers appropriately": function (suite) {
           suite.setHeader('x-test-header', true);
           suite.setHeaders({ 'Content-Type': 'application/json' });
-          assert.length(Object.keys(suite.options.headers), 1);
-          assert.equal(suite.options.headers['Content-Type'], 'application/json');
+          assert.length(Object.keys(suite.outgoing.headers), 1);
+          assert.equal(suite.outgoing.headers['Content-Type'], 'application/json');
         }
       },
       "the path() method": {
@@ -90,6 +90,15 @@ vows.describe('rest-easy/core').addBatch({
           suite.unpath();
         }
       },
+      "the before() method": {
+        "should append the function to the set of before operations": function (suite) {
+          suite.before('setAuth', function (outgoing) {
+            outgoing.headers['x-test-is-authorized'] = true;
+          });
+          
+          assert.isFunction(suite.before['setAuth']);
+        }
+      },
       "a GET test": {
         "with no path": {
           topic: function (suite) { 
@@ -104,6 +113,7 @@ vows.describe('rest-easy/core').addBatch({
             headers: {
               'Content-Type': 'application/json'
             },
+            before: 1,
             length: 4
           })
         },
@@ -116,6 +126,7 @@ vows.describe('rest-easy/core').addBatch({
             headers: {
               'Content-Type': 'application/json'
             },
+            before: 1,
             length: 2
           })
         },
@@ -128,8 +139,16 @@ vows.describe('rest-easy/core').addBatch({
             headers: {
               'Content-Type': 'application/json'
             },
+            before: 1,
             length: 2
           })
+        }
+      },
+      "the unbefore() method": {
+        "should remove the function from the set of before operations": function (suite) {
+          suite.unbefore('setAuth');
+          
+          assert.length(Object.keys(suite.before), 0);
         }
       },
       "A POST test": {
@@ -143,7 +162,8 @@ vows.describe('rest-easy/core').addBatch({
             headers: {
               'Content-Type': 'application/json'
             },
-            length: 2
+            length: 2,
+            before: 0
           })
         },
         "with no path and a request body": {
@@ -158,7 +178,8 @@ vows.describe('rest-easy/core').addBatch({
             headers: {
               'Content-Type': 'application/json'
             },
-            length: 2
+            length: 2,
+            before: 0
           })
         },
         "with no path, a request body, and params": {
@@ -173,7 +194,8 @@ vows.describe('rest-easy/core').addBatch({
             headers: {
               'Content-Type': 'application/json'
             },
-            length: 2
+            length: 2,
+            before: 0
           })
         },
         "with a path, request body, and params": {
@@ -188,7 +210,8 @@ vows.describe('rest-easy/core').addBatch({
             headers: {
               'Content-Type': 'application/json'
             },
-            length: 2
+            length: 2,
+            before: 0
           })
         }
       }
