@@ -96,7 +96,7 @@ vows.describe('rest-easy/core').addBatch({
             outgoing.headers['x-test-is-authorized'] = true;
           });
           
-          assert.isFunction(suite.before['setAuth']);
+          assert.isFunction(suite.befores['setAuth']);
         }
       },
       "a GET test": {
@@ -144,14 +144,13 @@ vows.describe('rest-easy/core').addBatch({
           })
         }
       },
-      "the unbefore() method": {
-        "should remove the function from the set of before operations": function (suite) {
-          suite.unbefore('setAuth');
-          
-          assert.length(Object.keys(suite.before), 0);
-        }
-      },
       "A POST test": {
+        "the unbefore() method": {
+          "should remove the function from the set of before operations": function (suite) {
+            suite.unbefore('setAuth');
+            assert.length(Object.keys(suite.befores), 0);
+          }
+        },
         "with no path": {
           topic: function (suite) {
             return suite.post().expect(201).batch;

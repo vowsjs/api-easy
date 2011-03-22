@@ -15,7 +15,7 @@ reservedOptions = {
     assert.length(Object.keys(batch), length);
   },
   'before': function (batch, length) {
-    assert.length(batch.topic.before, length);
+    assert.length(Object.keys(batch.topic.before), length);
   }
 };
 
