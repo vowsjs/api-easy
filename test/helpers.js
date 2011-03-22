@@ -5,7 +5,9 @@
  *
  */
  
-var assert = require('assert');
+var assert = require('assert'),
+    http = require('http'),
+    journey = require('journey');
  
 var helpers = exports, 
     reservedOptions;
@@ -41,4 +43,52 @@ helpers.assertOptions = function (scopes, local, outgoing) {
     });
   };
 };
- 
+
+helpers.startServer = function (port) {
+  var token, router = new journey.Router({ 
+    strict: false,
+    strictUrls: false,
+    api: 'basic'
+  });
+  
+  function isAuthorized (req, body, next) {
+    return parseInt(req.headers['x-test-authorized'], 10) === token ? next() : next(new journey.NotAuthorized());
+  }
+  
+  router.get('/tests').bind(function (res) {
+    res.send(200, {}, { ok: true });
+  });
+  
+  router.post('/tests').bind(function (res, data) {
+    res.send(200, {}, data);
+  });
+  
+  router.get('/login').bind(function (res) {
+    if (!token) {
+      token = Math.floor(Math.random() * 100);
+    }
+    
+    res.send(200, {}, { token: token });
+  });
+  
+  router.filter(isAuthorized, function () {
+    this.get('/restricted').bind(function (res) {
+      res.send(200, {}, { authorized: true });
+    });
+  });
+  
+  http.createServer(function (request, response) {
+    var body = "";
+
+    request.addListener('data', function (chunk) { body += chunk });
+    request.addListener('end', function () {
+      //
+      // Dispatch the request to the router
+      //
+      router.handle(request, body, function (result) {
+        response.writeHead(result.status, result.headers);
+        response.end(result.body);
+      });
+    });
+  }).listen(8000);
+};
