@@ -1,7 +1,7 @@
 {
   "name": "rest-easy",
   "description": "Fluent (i.e. chainable) syntax for generating vows tests against RESTful APIs.",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "author": "Charlie Robbins <charlie.robbins@gmail.com>",
   "repository": {
     "type": "git",
@@ -9,6 +9,7 @@
   },
   "keywords": ["testing", "api", "REST", "vows"],
   "dependencies": {
+    "journey": ">= 0.4.0-pre-2",
     "request": ">= 1.9.0",
     "vows": ">= 0.5.2"
   },
