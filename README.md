@@ -61,7 +61,7 @@ Here's a sample of the boilerplate code that RESTeasy eliminates:
           "should respond with ok": function (err, res, body) {
             var result = JSON.parse(body);
             assert.equal(result.ok, true);
-          }
+          },
           "should respond with x-test-header": function (err, res, body) {
             assert.include(res.headers, 'x-test-header');
           }
