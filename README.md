@@ -68,7 +68,7 @@ Here's a sample of the boilerplate code that RESTeasy eliminates:
         }
       }
     }
-  });
+  }).export(module);
 </pre>
 
 This same code can be implemented like this using RESTeasy:
@@ -87,7 +87,8 @@ This same code can be implemented like this using RESTeasy:
          .expect(200, { ok: true })
          .expect('should respond with x-test-header', function (err, res, body) {
            assert.include(res.headers, 'x-test-header');
-         });
+         })
+       .export(module);
 </pre>
 
 ## Roadmap
