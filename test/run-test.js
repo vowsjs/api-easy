@@ -1,5 +1,5 @@
 /*
- * core-test.js: Tests for core functionality of RESTeasy.
+ * core-test.js: Tests for core functionality of APIeasy.
  *
  * (C) 2011, Charlie Robbins
  *
@@ -10,18 +10,18 @@ require.paths.unshift(require('path').join(__dirname, '..', 'lib'));
 var vows = require('vows'),
     eyes = require('eyes'),
     assert = require('assert'),
-    RESTeasy = require('rest-easy'),
+    APIeasy = require('api-easy'),
     helpers = require('./helpers');
 
 var scopes = ['When using the Test API', 'the Test Resource'];
 
-vows.describe('rest-easy/run').addBatch({
-  "When using a RESTeasy suite": {
+vows.describe('api-easy/run').addBatch({
+  "When using a APIeasy suite": {
     "a suite of tests against a local test server": {
       topic: function () {
         helpers.startServer(8000);
 
-        var suite = RESTeasy.describe('api/test');
+        var suite = APIeasy.describe('api/test');
 
         scopes.forEach(function (text) {
           suite.discuss(text);

@@ -1,5 +1,5 @@
-<!DOCTYPE html>  <html> <head>   <title>rest-easy.js</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               rest-easy.js             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>                            </td>             <td class="code">               <div class="highlight"><pre><span class="cm">/*</span>
-<span class="cm"> * rest-easy.js: Top-level include for the rest-easy module.</span>
+<!DOCTYPE html>  <html> <head>   <title>api-easy.js</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               api-easy.js             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>                            </td>             <td class="code">               <div class="highlight"><pre><span class="cm">/*</span>
+<span class="cm"> * api-easy.js: Top-level include for the api-easy module.</span>
 <span class="cm"> *</span>
 <span class="cm"> * (C) 2011, Charlie Robbins</span>
 <span class="cm"> *</span>
@@ -8,11 +8,11 @@
 <span class="kd">var</span> <span class="nx">qs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;querystring&#39;</span><span class="p">),</span>
     <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;request&#39;</span><span class="p">),</span>
     <span class="nx">vows</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;vows&#39;</span><span class="p">),</span>
-    <span class="nx">assert</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;assert&#39;</span><span class="p">);</span></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <h3>Version 0.2.0 // <em>03/22/2011</em></h3>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">exports</span><span class="p">.</span><span class="nx">version</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">];</span></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <h2>RESTeasy.describe(text)</h2>
+    <span class="nx">assert</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;assert&#39;</span><span class="p">);</span></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <h3>Version 0.2.0 // <em>03/22/2011</em></h3>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">exports</span><span class="p">.</span><span class="nx">version</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">];</span></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <h2>APIeasy.describe(text)</h2>
 
-<p>This is the main (and sole) entry point for RESTeasy.
+<p>This is the main (and sole) entry point for APIeasy.
 It responds with an object literal that manages an 
-underlying vows suite. Each call to <code>RESTeasy.describe()</code> 
+underlying vows suite. Each call to <code>APIeasy.describe()</code> 
 will create a vows suite, with the corresponding <code>text</code> 
 passed to this method.</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">exports</span><span class="p">.</span><span class="nx">describe</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">text</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="p">{</span></pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <h3>State / Context management:</h3>
@@ -46,7 +46,7 @@ passed to this method.</p>             </td>             <td class="code">      
 Each call to discuss will create an object in the nested vows 
 structure which has that text as the key in the parent. <strong>e.g.:</strong></p>
 
-<pre><code>RESTeasy.describe('your/awesome/api')
+<pre><code>APIeasy.describe('your/awesome/api')
         .use('localhost', 8080)
         .discuss('When using your awesome API')
           .discuss('and an awesome resource')
@@ -127,7 +127,7 @@ before the request is made for all tests on the suite.      </p>             </t
 
 <p>The <code>.get()</code>, <code>.post()</code>, <code>.put()</code>, <code>.del()</code>, and <code>.head()</code> 
 methods add a new context and topic to the vows structure maintained
-by this RESTeasy suite. The nuts and bolts of this are in the "private"
+by this APIeasy suite. The nuts and bolts of this are in the "private"
 method <code>_request()</code>.</p>
 
 <p>Each method invocation returns the suite itself so that 
@@ -231,7 +231,7 @@ sequential tests. This is precisely what <code>.next()</code> does. It will:</p>
 
 <p>Again, since we are managing a single vows suite in this object we 
 should expose an easy way to export your tests to a given target without
-needing to call <code>restEasySuite.suite.export(module)</code>. You should only 
+needing to call <code>apiEasySuite.suite.export(module)</code>. You should only 
 call this method once in a given test file.  </p>
 
 <p>You can also call <code>.run()</code> which will run the specified suite just 
@@ -262,7 +262,7 @@ as if you were using vows directly.</p>             </td>             <td class=
 <p><code>_request()</code> exists for the sake of DRY and simplicity and is designed to handle
 a variety of interal usage(s) exposed indirectly through the <code>.get()</code>,
 <code>.post()</code>, <code>.put()</code>, <code>.del()</code> and <code>.head()</code>. Nothing to see here unless you're 
-interested in improving RESTeasy itself.</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">_request</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="cm">/* method [uri, data, params] */</span><span class="p">)</span> <span class="p">{</span>
+interested in improving APIeasy itself.</p>             </td>             <td class="code">               <div class="highlight"><pre>    <span class="nx">_request</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="cm">/* method [uri, data, params] */</span><span class="p">)</span> <span class="p">{</span>
       <span class="kd">var</span> <span class="nx">self</span>    <span class="o">=</span> <span class="k">this</span><span class="p">,</span>
           <span class="nx">args</span>    <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">arguments</span><span class="p">),</span>
           <span class="nx">method</span>  <span class="o">=</span> <span class="nx">args</span><span class="p">.</span><span class="nx">shift</span><span class="p">(),</span>
@@ -326,7 +326,7 @@ JSON structure using this convention.</p>             </td>             <td clas
     <span class="p">}</span>
   <span class="p">};</span>
 <span class="p">};</span></pre></div>             </td>           </tr>                               <tr id="section-32">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-32">&#182;</a>               </div>               <p>A simple function that performs a deep clone on the specified <code>obj</code>. 
-We use this in RESTeasy to create multiple copies of the <code>options</code> 
+We use this in APIeasy to create multiple copies of the <code>options</code> 
 passed to <code>request</code> because they are considered mutable by <code>request</code>
 and we strive to make each request idempotent. </p>             </td>             <td class="code">               <div class="highlight"><pre><span class="kd">function</span> <span class="nx">clone</span> <span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">{</span>
   <span class="kd">var</span> <span class="nx">copy</span> <span class="o">=</span> <span class="p">{};</span>

@@ -1,4 +1,4 @@
-# RESTeasy
+# APIeasy
 
 A fluent (i.e. chainable) syntax for generating vows tests against RESTful APIs.
 
@@ -9,18 +9,18 @@ A fluent (i.e. chainable) syntax for generating vows tests against RESTful APIs.
   curl http://npmjs.org/install.sh | sh
 </pre>
 
-### Installing RESTeasy
+### Installing APIeasy
 <pre>
-  [sudo] npm install rest-easy
+  [sudo] npm install api-easy
 </pre>
 
 ## Purpose
-RESTeasy is designed to be a simple way to test RESTful APIs in [node.js][0] and Javascript. The primary design goal was to reduce the number of lines of test code required to fully cover all primary and edge use cases of a given API over HTTP. 
+APIeasy is designed to be a simple way to test RESTful APIs in [node.js][0] and Javascript. The primary design goal was to reduce the number of lines of test code required to fully cover all primary and edge use cases of a given API over HTTP. 
 
 ## Getting Started
 Most of the documentation for this library is available through the [annotated source code, available here][1] thanks to [jashkenas][2] and [docco][3]. If you're not feeling up for that, just keep reading here. 
 
-If you're going to use RESTeasy (and I hope you do), it's worth taking a moment to understand the way that [vows][4] manages flow control. Read up here on [vowsjs.org][4] (Under "Structure of a test suite"), or just remember vows uses this grammatical structure:
+If you're going to use APIeasy (and I hope you do), it's worth taking a moment to understand the way that [vows][4] manages flow control. Read up here on [vowsjs.org][4] (Under "Structure of a test suite"), or just remember vows uses this grammatical structure:
 
 <pre>
   Suite   → Batch*
@@ -28,13 +28,13 @@ If you're going to use RESTeasy (and I hope you do), it's worth taking a moment 
   Context → Topic? Vow* Context*
 </pre> 
 
-Got it? Good. There is a 1-to-1 relationship between a RESTeasy suite and a vows suite; RESTeasy is essentially a simpler syntax to manage a particular set of vows-based tests that conform to this pattern:
+Got it? Good. There is a 1-to-1 relationship between a APIeasy suite and a vows suite; APIeasy is essentially a simpler syntax to manage a particular set of vows-based tests that conform to this pattern:
 
 1. Tests are performed by making HTTP requests against an API server
 2. Assertions are made against the HTTP response and JSON response body
 3. Rinse. Repeat.
 
-Here's a sample of the boilerplate code that RESTeasy eliminates:
+Here's a sample of the boilerplate code that APIeasy eliminates:
 
 <pre>
   var request = require('request'),
@@ -71,13 +71,13 @@ Here's a sample of the boilerplate code that RESTeasy eliminates:
   }).export(module);
 </pre>
 
-This same code can be implemented like this using RESTeasy:
+This same code can be implemented like this using APIeasy:
 
 <pre>
-  var RESTeasy = require('rest-easy'),
+  var APIeasy = require('api-easy'),
       assert = require('assert');
       
-  var suite = RESTeasy.describe('your/awesome/api');
+  var suite = APIeasy.describe('your/awesome/api');
   
   suite.discuss('When using your awesome API')
        .discuss('and your awesome resource')
@@ -105,8 +105,8 @@ This same code can be implemented like this using RESTeasy:
 #### Author: [Charlie Robbins](http://nodejitsu.com)
 
 [0]: http://nodejs.org
-[1]: http://indexzero.github.com/rest-easy
+[1]: http://indexzero.github.com/api-easy
 [2]: http://github.com/jashkenas
 [3]: http://github.com/jashkenas/docco
 [4]: http://vowsjs.org
-[5]: http://github.com/indexzero/rest-easy/issues
+[5]: http://github.com/indexzero/api-easy/issues

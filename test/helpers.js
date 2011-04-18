@@ -1,5 +1,5 @@
 /*
- * helpers.js: Test macros for RESTeasy.
+ * helpers.js: Test macros for APIeasy.
  *
  * (C) 2011, Charlie Robbins
  *
