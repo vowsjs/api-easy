@@ -63,6 +63,10 @@ helpers.startServer = function (port) {
     res.send(200, {}, data);
   });
   
+  router.post('/redirect').bind(function (res, data) {
+    res.send(302, { 'Location': 'http://localhost:8000/login' }, data);
+  });
+  
   router.get('/login').bind(function (res) {
     if (!token) {
       token = Math.floor(Math.random() * 100);

@@ -5,12 +5,9 @@
  *
  */
 
-require.paths.unshift(require('path').join(__dirname, '..', 'lib'));
-
 var vows = require('vows'),
-    eyes = require('eyes'),
     assert = require('assert'),
-    APIeasy = require('api-easy'),
+    APIeasy = require('../lib/api-easy'),
     helpers = require('./helpers');
 
 var scopes = ['When using the Test API', 'the Test Resource'];
@@ -35,10 +32,13 @@ vows.describe('api-easy/run').addBatch({
 
         suite.use('localhost', 8000)
              .setHeader('Content-Type', 'application/json')
+             .followRedirect(false)
              .get('/tests')
                .expect(200, { ok: true })
              .post('/tests', { dynamic: true })
                .expect(200, { dynamic: true })
+             .post('/redirect', { dynamic: true })
+               .expect(302, { dynamic: true })
              .get('/login')
                .expect(200)
                .expect('should respond with the authorize token', function (err, res, body) {
@@ -59,8 +59,8 @@ vows.describe('api-easy/run').addBatch({
         assert.equal(results.errored, 0);
         assert.equal(results.broken, 0);
         assert.equal(results.pending, 0);
-        assert.equal(results.honored, 8);
-        assert.equal(results.total, 8);
+        assert.equal(results.honored, 10);
+        assert.equal(results.total, 10);
       }
     }
   }

@@ -5,12 +5,9 @@
  *
  */
 
-require.paths.unshift(require('path').join(__dirname, '..', 'lib'));
-
 var vows = require('vows'),
-    eyes = require('eyes'),
     assert = require('assert'),
-    apiEasy = require('api-easy'),
+    apiEasy = require('../lib/api-easy'),
     helpers = require('./helpers');
 
 var scopes = ['When using the Test API', 'the Test Resource'];
