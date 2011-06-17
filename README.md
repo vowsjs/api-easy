@@ -99,7 +99,7 @@ This same code can be implemented like this using APIeasy:
 
 ## Run Tests
 <pre>
-  vows test/*-test.js --spec
+  npm test
 </pre>
 
 #### Author: [Charlie Robbins](http://nodejitsu.com)
