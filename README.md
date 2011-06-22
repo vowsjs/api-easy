@@ -5,14 +5,14 @@ A fluent (i.e. chainable) syntax for generating vows tests against RESTful APIs.
 ## Installation
 
 ### Installing npm (node package manager)
-<pre>
-  curl http://npmjs.org/install.sh | sh
-</pre>
+``` bash
+  $ curl http://npmjs.org/install.sh | sh
+```
 
 ### Installing APIeasy
-<pre>
-  [sudo] npm install api-easy
-</pre>
+``` bash
+  $ [sudo] npm install api-easy
+```
 
 ## Purpose
 APIeasy is designed to be a simple way to test RESTful APIs in [node.js][0] and Javascript. The primary design goal was to reduce the number of lines of test code required to fully cover all primary and edge use cases of a given API over HTTP. 
@@ -22,11 +22,11 @@ Most of the documentation for this library is available through the [annotated s
 
 If you're going to use APIeasy (and I hope you do), it's worth taking a moment to understand the way that [vows][5] manages flow control. Read up here on [vowsjs.org][5] (Under "Structure of a test suite"), or just remember vows uses this grammatical structure:
 
-<pre>
+```
   Suite   → Batch*
   Batch   → Context*
   Context → Topic? Vow* Context*
-</pre> 
+```
 
 Got it? Good. There is a 1-to-1 relationship between a APIeasy suite and a vows suite; APIeasy is essentially a simpler syntax to manage a particular set of vows-based tests that conform to this pattern:
 
@@ -36,7 +36,7 @@ Got it? Good. There is a 1-to-1 relationship between a APIeasy suite and a vows 
 
 Here's a sample of the boilerplate code that APIeasy eliminates:
 
-<pre>
+``` js
   var request = require('request'),
       vows = require('vows'),
       assert = require('assert');
@@ -69,11 +69,11 @@ Here's a sample of the boilerplate code that APIeasy eliminates:
       }
     }
   }).export(module);
-</pre>
+```
 
 This same code can be implemented like this using APIeasy:
 
-<pre>
+``` js
   var APIeasy = require('api-easy'),
       assert = require('assert');
       
@@ -89,7 +89,7 @@ This same code can be implemented like this using APIeasy:
            assert.include(res.headers, 'x-test-header');
          })
        .export(module);
-</pre>
+```
 
 <a name="using-api-easy">
 ## Using APIeasy in your own project
