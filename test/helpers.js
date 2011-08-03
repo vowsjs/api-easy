@@ -67,6 +67,10 @@ helpers.startServer = function (port) {
     res.send(302, { 'Location': 'http://localhost:8000/login' }, data);
   });
   
+  router.post('/upload').bind(function (res, data) {
+    res.send(200, {}, data);
+  });
+  
   router.get('/login').bind(function (res) {
     if (!token) {
       token = Math.floor(Math.random() * 100);
@@ -95,4 +99,32 @@ helpers.startServer = function (port) {
       });
     });
   }).listen(8000);
+};
+
+helpers.startFileEchoServer = function (port) {
+
+  var formidable = require("formidable");
+  var fs = require("fs");
+  
+  
+  http.createServer(function (request, response) {
+    var form = new formidable.IncomingForm(),
+        files = [],
+        fields = [];
+        
+    form.uploadDir = __dirname+"/uploads";
+
+    form
+      .on('field', function(field, value) {
+        fields.push([field, value]);
+      })
+      .on('file', function(field, file) {
+        files.push([field, file]);
+      })
+      .on('end', function() {
+        response.writeHead(200, {'content-type': request.headers['content-type']});
+        response.end(fs.readFileSync(files[0][1].path));
+      });
+    form.parse(request);
+  }).listen(8080);
 };

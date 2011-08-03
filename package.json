@@ -13,7 +13,8 @@
     "vows": "0.5.x"
   },
   "devDependencies": {
-    "journey": ">= 0.4.0-pre-2"
+    "journey": ">= 0.4.0-pre-2",
+    "formidable": "1.0.2"
   },
   "main": "./lib/api-easy",
   "scripts": { "test": "vows test/*-test.js --spec" },
