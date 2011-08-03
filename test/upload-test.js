@@ -33,7 +33,7 @@ vows.describe('api-easy/run').addBatch({
         suite.use('localhost', 8080)
              .followRedirect(false)
              .setHeader("content-type", 'multipart/form-data')
-             .uploadFile('/upload', __dirname+"/file.txt")
+             .uploadFile('/upload', __dirname+"/file.txt", 'file')
                .expect(200)
                .expect("should return file", function(err, res, body) {
                   assert.equal('TEST FILE CONTENT HERE', body);
