@@ -9,8 +9,8 @@
   },
   "keywords": ["testing", "api", "REST", "vows"],
   "dependencies": {
-    "request": ">= 1.9.0",
-    "vows": ">= 0.5.2"
+    "request": "2.x.x",
+    "vows": "0.5.x"
   },
   "devDependencies": {
     "journey": ">= 0.4.0-pre-2"
