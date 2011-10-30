@@ -20,24 +20,34 @@ vows.describe('api-easy/vows').addBatch({
       assert.length(Object.keys(apiEasy), 2);
     },
     "and a valid suite": {
-      "should have the vows method": function (suite) {
-          assert.isFunction(suite['vows']);
+      "should have the addBatch method": function (suite) {
+          assert.isFunction(suite['addBatch']);
       },
-      "the vows() method": {
-        "should return the vows suite with easy method": function (suite) {
-          var vows = suite.vows();
-          assert.isFunction(vows['addBatch']);
-          assert.isFunction(vows['easy']);
+      "the addBatch() method": {
+        "should return the vows suite with addBatch,get,put,post,del,head,uploadFile methods": function (suite) {
+          var vows = suite.addBatch({
+              topic: function(){
+                return 1+1;
+              },
+              "test": function(result){
+                assert.equal(result,2);
+              }
+          });
+          ["addBatch","get","put","post","del","head","uploadFile"].forEach(function(method){
+            assert.isFunction(vows[method], method+" is missing");
+          });
         }, 
-        "and the vows' easy() method": {
-            "should return back the APIEasy suite": function (suite) {
-              var easy = suite.vows().easy();
+        "and the vows suite's get, put, post, del, head, uploadFile method": {
+          "should return back the APIEasy suite": function (suite) {
+            ["get","put","post","del","head","uploadFile"].forEach(function(method){
+              var easy = suite[method]();
               assert.isObject(easy);
               ['discuss', 'use', 'setHeaders', 'path', 'unpath', 'root', 'get', 'put', 
-               'post', 'del', 'expect', 'next', 'export', '_request', '_currentTest', "vows"].forEach(function (key) {
+               'post', 'del', 'expect', 'next', 'export', '_request', '_currentTest', "addBatch"].forEach(function (key) {
                 assert.isFunction(easy[key]);
               });
-            }
+            });
+          }
         }
       }
     }
