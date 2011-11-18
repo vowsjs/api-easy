@@ -14,10 +14,10 @@ var helpers = exports,
 
 reservedOptions = {
   'length': function (batch, length) {
-    assert.length(Object.keys(batch), length);
+    assert.lengthOf(Object.keys(batch), length);
   },
   'before': function (batch, length) {
-    assert.length(Object.keys(batch.topic.before), length);
+    assert.lengthOf(Object.keys(batch.topic.before), length);
   }
 };
 

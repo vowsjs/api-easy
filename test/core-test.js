@@ -17,7 +17,7 @@ vows.describe('api-easy/core').addBatch({
     topic: apiEasy.describe('test/api').discuss('When using the Test API'),
     "it should have the correct methods set": function () {
       assert.isFunction(apiEasy.describe);
-      assert.length(Object.keys(apiEasy), 2);
+      assert.lengthOf(Object.keys(apiEasy), 2);
     },
     "and a valid suite": {
       "it should have the correct methods set": function (suite) {
@@ -32,7 +32,7 @@ vows.describe('api-easy/core').addBatch({
           suite.discuss('the Test Resource')
                .discuss('and something else worth mentioning');
           
-          assert.length(suite.discussion, length + 2);
+          assert.lengthOf(suite.discussion, length + 2);
         }
       },
       "the undiscuss() method": {
@@ -40,7 +40,7 @@ vows.describe('api-easy/core').addBatch({
           var length = suite.discussion.length;
           suite.undiscuss();
           
-          assert.length(suite.discussion, length - 1);
+          assert.lengthOf(suite.discussion, length - 1);
         }
       },
       "the use() method": {
@@ -54,21 +54,21 @@ vows.describe('api-easy/core').addBatch({
         "should set the header appropriately": function (suite) {
           var length = Object.keys(suite.outgoing.headers).length;
           suite.setHeader('x-test-header', true);
-          assert.length(Object.keys(suite.outgoing.headers), length + 1);
+          assert.lengthOf(Object.keys(suite.outgoing.headers), length + 1);
         }
       },
       "the removeHeader() method": {
         "should remove the header appropriately": function (suite) {
           var length = Object.keys(suite.outgoing.headers).length;
           suite.removeHeader('x-test-header');
-          assert.length(Object.keys(suite.outgoing.headers), length - 1);
+          assert.lengthOf(Object.keys(suite.outgoing.headers), length - 1);
         }
       },
       "the setHeaders() method": {
         "should set all headers appropriately": function (suite) {
           suite.setHeader('x-test-header', true);
           suite.setHeaders({ 'Content-Type': 'application/json' });
-          assert.length(Object.keys(suite.outgoing.headers), 1);
+          assert.lengthOf(Object.keys(suite.outgoing.headers), 1);
           assert.equal(suite.outgoing.headers['Content-Type'], 'application/json');
         }
       },
@@ -77,7 +77,7 @@ vows.describe('api-easy/core').addBatch({
           suite.path('/tests');
           var length = suite.paths.length;
           suite.path('/more-tests');
-          assert.length(suite.paths, length + 1);
+          assert.lengthOf(suite.paths, length + 1);
           assert.equal('more-tests', suite.paths[suite.paths.length - 1]);
         }
       },
@@ -145,7 +145,7 @@ vows.describe('api-easy/core').addBatch({
         "the unbefore() method": {
           "should remove the function from the set of before operations": function (suite) {
             suite.unbefore('setAuth');
-            assert.length(Object.keys(suite.befores), 0);
+            assert.lengthOf(Object.keys(suite.befores), 0);
           }
         },
         "with no path": {
