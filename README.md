@@ -1,4 +1,4 @@
-# APIeasy
+# APIeasy [![Build Status](https://secure.travis-ci.org/flatiron/api-easy.png)](http://travis-ci.org/flatiron/api-easy)
 
 A fluent (i.e. chainable) syntax for generating vows tests against RESTful APIs.
 
