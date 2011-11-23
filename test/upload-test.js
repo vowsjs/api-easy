@@ -12,7 +12,7 @@ var vows = require('vows'),
 
 var scopes = ['When using the Test API', 'the Test Resource'];
 
-vows.describe('api-easy/run').addBatch({
+vows.describe('api-easy/upload').addBatch({
   "When using a APIeasy suite": {
     "an upload test against a local test server": {
       topic: function () {
@@ -33,9 +33,9 @@ vows.describe('api-easy/run').addBatch({
         suite.use('localhost', 8080)
              .followRedirect(false)
              .setHeader("content-type", 'multipart/form-data')
-             .uploadFile('/upload', __dirname+"/file.txt", 'file')
+             .uploadFile('/upload', __dirname + "/file.txt", 'file')
                .expect(200)
-               .expect("should return file", function(err, res, body) {
+               .expect("should return file", function (err, res, body) {
                   assert.equal('TEST FILE CONTENT HERE', body);
                })
              .run(this.callback.bind(null, null));
