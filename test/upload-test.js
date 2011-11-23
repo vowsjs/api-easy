@@ -5,14 +5,22 @@
  *
  */
 
-var vows = require('vows'),
+var path = require('path'),
+    vows = require('vows'),
     assert = require('assert'),
+    mkdirp = require('mkdirp'),
     APIeasy = require('../lib/api-easy'),
     helpers = require('./helpers');
 
 var scopes = ['When using the Test API', 'the Test Resource'];
 
 vows.describe('api-easy/upload').addBatch({
+  "Before tests begin": {
+    "test/uploads should be created": function () {
+      mkdirp.sync(path.join(__dirname, 'uploads'), 0777);
+    }
+  }
+}).addBatch({
   "When using a APIeasy suite": {
     "an upload test against a local test server": {
       topic: function () {
