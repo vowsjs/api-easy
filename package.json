@@ -14,7 +14,8 @@
   },
   "devDependencies": {
     "journey": ">= 0.4.0-pre-2",
-    "formidable": "1.0.2"
+    "formidable": "1.0.2",
+    "mkdirp": "0.2.x"
   },
   "main": "./lib/api-easy",
   "scripts": { "test": "vows test/*-test.js --spec" },
