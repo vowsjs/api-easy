@@ -1,7 +1,7 @@
 /*
  * helpers.js: Test macros for APIeasy.
  *
- * (C) 2011, Nodejitsu Inc., Charlie Robbins
+ * (C) 2011, Nodejitsu Inc.
  *
  */
  
