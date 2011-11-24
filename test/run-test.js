@@ -39,6 +39,8 @@ vows.describe('api-easy/run').addBatch({
                .expect(200, { dynamic: true })
              .post('/redirect', { dynamic: true })
                .expect(302, { dynamic: true })
+             .get('restricted')
+               .expect(401)
              .get('/login')
                .expect(200)
                .expect('should respond with the authorize token', function (err, res, body) {
@@ -59,8 +61,8 @@ vows.describe('api-easy/run').addBatch({
         assert.equal(results.errored, 0);
         assert.equal(results.broken, 0);
         assert.equal(results.pending, 0);
-        assert.equal(results.honored, 10);
-        assert.equal(results.total, 10);
+        assert.equal(results.honored, 11);
+        assert.equal(results.total, 11);
       }
     }
   }
