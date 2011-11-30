@@ -44,7 +44,7 @@ vows.describe('api-easy/vows').addBatch({
               var easy = suite[method]();
               assert.isObject(easy);
               ['discuss', 'use', 'setHeaders', 'path', 'unpath', 'root', 'get', 'put', 
-               'post', 'del', 'expect', 'next', 'export', '_request', '_currentTest', 'addBatch'].forEach(function (key) {
+               'post', 'del', 'expect', 'next', 'export', 'exportTo', '_request', '_currentTest', 'addBatch'].forEach(function (key) {
                 assert.isFunction(easy[key]);
               });
             });
