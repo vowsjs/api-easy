@@ -152,12 +152,12 @@ After installing vows you can simply run it from inside your project:
 #### Author: [Charlie Robbins](http://nodejitsu.com)
 
 [0]: http://nodejs.org
-[1]: http://indexzero.github.com/api-easy
+[1]: http://flatiron.github.com/api-easy
 [2]: http://github.com/jashkenas
 [3]: http://github.com/jashkenas/docco
 [4]: #using-api-easy
 [5]: http://vowsjs.org
-[6]: http://github.com/indexzero/api-easy/issues
+[6]: http://github.com/flatiron/api-easy/issues
 [7]: http://npmjs.org
 [8]: https://github.com/isaacs/npm/blob/master/doc/test.md
 [9]: https://gist.github.com/1039425
