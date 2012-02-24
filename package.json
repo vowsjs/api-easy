@@ -14,7 +14,8 @@
   "dependencies": {
     "pkginfo": "0.2.x",
     "request": "2.x.x",
-    "vows": "0.6.x"
+    "vows": "0.6.x",
+    "qs": "0.4.x"
   },
   "devDependencies": {
     "director": "~1.0.3",
