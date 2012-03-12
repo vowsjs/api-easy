@@ -1,7 +1,7 @@
 {
   "name": "api-easy",
   "description": "Fluent (i.e. chainable) syntax for generating vows tests against RESTful APIs.",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "author": "Nodejitsu Inc. <info@nodejitsu.com>",
   "contributors": [
     { "name": "Charlie Robbins", "email": "charlie@nodejitsu.com" }
