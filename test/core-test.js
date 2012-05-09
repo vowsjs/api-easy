@@ -22,7 +22,7 @@ vows.describe('api-easy/core').addBatch({
     "and a valid suite": {
       "it should have the correct methods set": function (suite) {
         ['discuss', 'use', 'setHeaders', 'path', 'unpath', 'root', 'get', 'put', 
-          'post', 'del', 'expect', 'next', 'export', 'exportTo', '_request', '_currentTest'].forEach(function (key) {
+          'post', 'patch', 'del', 'expect', 'next', 'export', 'exportTo', '_request', '_currentTest'].forEach(function (key) {
           assert.isFunction(suite[key]);
         });
       },
