@@ -50,6 +50,26 @@ vows.describe('api-easy/core').addBatch({
           assert.equal(suite.port, 8080);
         }
       },
+      "the authenticate() method": {
+        "with one parameter": {
+          "should set `auth` properly": function (suite) {
+            suite.authenticate('nodejitsu:1234');
+            assert.equal(suite.auth, 'nodejitsu:1234');
+          }
+        },
+        "with two parameters": {
+          "should set `auth` properly": function (suite) {
+            suite.authenticate('maciej', '1234');
+            assert.equal(suite.auth, 'maciej:1234');
+          }
+        },
+        "then the unauthenticate() method": {
+          "should unset `auth` properly": function (suite) {
+            suite.unauthenticate();
+            assert.isNull(suite.auth);
+          }
+        }
+      },
       "the setHeader() method": {
         "should set the header appropriately": function (suite) {
           var length = Object.keys(suite.outgoing.headers).length;
