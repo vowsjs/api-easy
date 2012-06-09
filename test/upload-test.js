@@ -41,10 +41,12 @@ vows.describe('api-easy/upload').addBatch({
         suite.use('localhost', 8080)
              .followRedirect(false)
              .setHeader("content-type", 'multipart/form-data')
-             .uploadFile('/upload', __dirname + "/file.txt", 'file')
-               .expect(200)
+             .uploadFile('/upload', __dirname + "/file.txt", 'file', {
+               description: 'A description to send'
+             }).expect(200)
                .expect("should return file", function (err, res, body) {
-                  assert.equal('TEST FILE CONTENT HERE', body);
+                  assert.include(body, 'TEST FILE CONTENT HERE');
+                  assert.include(body, 'A description to send');
                })
              .run(this.callback.bind(null, null));
       },

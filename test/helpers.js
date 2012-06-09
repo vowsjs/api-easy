@@ -135,7 +135,7 @@ helpers.startFileEchoServer = function (port) {
       })
       .on('end', function () {
         response.writeHead(200, {'content-type': request.headers['content-type']});
-        response.end(fs.readFileSync(files[0][1].path));
+        response.end(JSON.stringify({fields : fields, file: fs.readFileSync(files[0][1].path).toString() }));
       });
     form.parse(request);
   }).listen(8080);
