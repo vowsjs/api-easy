@@ -15,7 +15,7 @@ A fluent (i.e. chainable) syntax for generating vows tests against RESTful APIs.
 ```
 
 ## Purpose
-APIeasy is designed to be a simple way to test RESTful APIs in [node.js][0] and Javascript. The primary design goal was to reduce the number of lines of test code required to fully cover all primary and edge use cases of a given API over HTTP. 
+APIeasy is designed to be a simple way to test RESTful APIs in [node.js][0] and Javascript. The primary design goal was to reduce the number of lines of test code required to fully cover all primary and edge use cases of a given API over HTTP.
 
 ## Getting Started
 Most of the documentation for this library is available through the [annotated source code, available here][1] thanks to [jashkenas][2] and [docco][3]. If you're not feeling up for that, just keep reading here. tldr;? [Read how to use APIeasy in your own projects][4]
@@ -40,7 +40,7 @@ Here's a sample of the boilerplate code that APIeasy eliminates:
   var request = require('request'),
       vows = require('vows'),
       assert = require('assert');
-  
+
   vows.describe('your/awesome/api').addBatch({
     "When using your awesome api": {
       "and your awesome resource": {
@@ -76,14 +76,14 @@ This same code can be implemented like this using APIeasy:
 ``` js
   var APIeasy = require('api-easy'),
       assert = require('assert');
-      
+
   var suite = APIeasy.describe('your/awesome/api');
-  
+
   suite.discuss('When using your awesome API')
        .discuss('and your awesome resource')
        .use('localhost', 8080)
        .setHeader('Content-Type', 'application/json')
-       .post({ test: 'data' })
+       .post('/awesome', { test: 'data' })
          .expect(200, { ok: true })
          .expect('should respond with x-test-header', function (err, res, body) {
            assert.include(res.headers, 'x-test-header');
@@ -112,7 +112,7 @@ If you've used the `npm test` command in [npm][7] before, this should be nothing
  }
 ```
 
-**Note:** `test/*-test.js` is at your discretion. It's just an expression for all test files in your project. 
+**Note:** `test/*-test.js` is at your discretion. It's just an expression for all test files in your project.
 
 After adding this to your `package.json` file you can run the following to execute your tests:
 
