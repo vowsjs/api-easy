@@ -17,9 +17,9 @@
     "vows"
   ],
   "dependencies": {
-    "pkginfo": "0.2.x",
+    "pkginfo": "0.3.x",
     "request": "2.x.x",
-    "vows": "0.6.x",
+    "vows": "0.7.x",
     "qs": "0.5.x"
   },
   "devDependencies": {
