@@ -159,5 +159,5 @@ After installing vows you can simply run it from inside your project:
 [5]: http://vowsjs.org
 [6]: http://github.com/flatiron/api-easy/issues
 [7]: http://npmjs.org
-[8]: https://github.com/isaacs/npm/blob/master/doc/test.md
+[8]: https://github.com/isaacs/npm/blob/master/doc/cli/npm-test.md
 [9]: https://gist.github.com/1039425
