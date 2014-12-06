@@ -1,7 +1,7 @@
 /*
  * core-test.js: Tests for core functionality of APIeasy.
  *
- * (C) 2011, Nodejitsu Inc.
+ * (C) 2011, Charlie Robbins & the Contributors.
  *
  */
 
@@ -21,7 +21,7 @@ vows.describe('api-easy/core').addBatch({
     },
     "and a valid suite": {
       "it should have the correct methods set": function (suite) {
-        ['discuss', 'use', 'setHeaders', 'path', 'unpath', 'root', 'get', 'put', 
+        ['discuss', 'use', 'setHeaders', 'path', 'unpath', 'root', 'get', 'put',
           'post', 'patch', 'del', 'expect', 'next', 'export', 'exportTo', '_request', '_currentTest'].forEach(function (key) {
           assert.isFunction(suite[key]);
         });
@@ -31,7 +31,7 @@ vows.describe('api-easy/core').addBatch({
           var length = suite.discussion.length;
           suite.discuss('the Test Resource')
                .discuss('and something else worth mentioning');
-          
+
           assert.lengthOf(suite.discussion, length + 2);
         }
       },
@@ -39,7 +39,7 @@ vows.describe('api-easy/core').addBatch({
         "should remove the last discussion text": function (suite) {
           var length = suite.discussion.length;
           suite.undiscuss();
-          
+
           assert.lengthOf(suite.discussion, length - 1);
         }
       },
@@ -112,13 +112,13 @@ vows.describe('api-easy/core').addBatch({
           suite.before('setAuth', function (outgoing) {
             outgoing.headers['x-test-is-authorized'] = true;
           });
-          
+
           assert.isFunction(suite.befores['setAuth']);
         }
       },
       "a GET test": {
         "with no path": {
-          topic: function (suite) { 
+          topic: function (suite) {
             return suite.get()
                         .expect(200, { available: true })
                         .expect('should do something custom', function (res, body) {

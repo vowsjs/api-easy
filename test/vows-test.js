@@ -1,7 +1,7 @@
 /*
  * core-test.js: Tests for core functionality of APIeasy.
  *
- * (C) 2011, Nodejitsu Inc.
+ * (C) 2011, Charlie Robbins & the Contributors.
  *
  */
 
@@ -37,13 +37,13 @@ vows.describe('api-easy/vows').addBatch({
           ['addBatch', 'get', 'put', 'post', 'del', 'head', 'uploadFile'].forEach(function (method) {
             assert.isFunction(vows[method], method + ' is missing');
           });
-        }, 
+        },
         "and the vows suite's get, put, post, del, head, uploadFile method": {
           "should return back the APIEasy suite": function (suite) {
             ['get', 'put', 'post', 'del', 'head', 'uploadFile'].forEach(function (method) {
               var easy = suite[method]();
               assert.isObject(easy);
-              ['discuss', 'use', 'setHeaders', 'path', 'unpath', 'root', 'get', 'put', 
+              ['discuss', 'use', 'setHeaders', 'path', 'unpath', 'root', 'get', 'put',
                'post', 'del', 'expect', 'next', 'export', 'exportTo', '_request', '_currentTest', 'addBatch'].forEach(function (key) {
                 assert.isFunction(easy[key]);
               });

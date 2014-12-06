@@ -2,10 +2,7 @@
   "name": "api-easy",
   "description": "Fluent (i.e. chainable) syntax for generating vows tests against RESTful APIs.",
   "version": "0.3.8",
-  "author": "Nodejitsu Inc. <info@nodejitsu.com>",
-  "maintainers": [
-    "indexzero <charlie@nodejitsu.com>"
-  ],
+  "author": "Charlie Robbins <charlie.robbins@gmail.com>",
   "repository": {
     "type": "git",
     "url": "http://github.com/flatiron/api-easy.git"
@@ -20,7 +17,7 @@
     "pkginfo": "0.3.x",
     "request": "2.x.x",
     "vows": "0.7.x",
-    "qs": "0.5.x"
+    "qs": "~2.3.3"
   },
   "devDependencies": {
     "director": "~1.0.3",
@@ -32,7 +29,7 @@
     "test": "vows test/*-test.js --spec"
   },
   "engines": {
-    "node": ">= 0.4.3"
+    "node": ">= 0.8.0"
   }
 }
 

@@ -1,7 +1,7 @@
 /*
  * core-test.js: Tests for core functionality of APIeasy.
  *
- * (C) 2011, Nodejitsu Inc.
+ * (C) 2011, Charlie Robbins & the Contributors.
  *
  */
 
@@ -25,8 +25,8 @@ vows.describe('api-easy/run').addBatch({
         });
 
         // Mock the underlying vows suite reporter to silence it
-        suite.suite.reporter = { 
-          report: function () { 
+        suite.suite.reporter = {
+          report: function () {
           }
         }
 

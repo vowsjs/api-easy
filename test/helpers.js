@@ -1,15 +1,15 @@
 /*
  * helpers.js: Test macros for APIeasy.
  *
- * (C) 2011, Nodejitsu Inc.
+ * (C) 2011, Charlie Robbins & the Contributors.
  *
  */
- 
+
 var assert = require('assert'),
     http = require('http'),
     director = require('director');
- 
-var helpers = exports, 
+
+var helpers = exports,
     reservedOptions;
 
 reservedOptions = {
@@ -24,15 +24,15 @@ reservedOptions = {
 helpers.assertOptions = function (scopes, local, outgoing) {
   return function (batch) {
     var localScope = scopes.concat(local);
-    
+
     localScope.forEach(function (scope) {
       assert.isObject(batch[scope]);
       batch = batch[scope];
     });
-    
+
     assert.isFunction(batch.topic);
     assert.isObject(batch.topic.outgoing);
-    
+
     Object.keys(outgoing).forEach(function (key) {
       if (reservedOptions[key]) {
         reservedOptions[key](batch, outgoing[key]);
@@ -45,7 +45,7 @@ helpers.assertOptions = function (scopes, local, outgoing) {
 };
 
 //
-// Replace deprecated `res.send` method in `journey` with a 
+// Replace deprecated `res.send` method in `journey` with a
 // simple helper, `res.json`.
 //
 http.ServerResponse.prototype.json = function (code, headers, data) {
@@ -53,57 +53,57 @@ http.ServerResponse.prototype.json = function (code, headers, data) {
     data = headers;
     headers = null;
   }
-  
+
   if (headers && Object.keys(headers).length) {
     for (var key in headers) {
       this.setHeader(key, headers[key]);
     }
   }
-  
+
   this.writeHead(code);
   this.end(data ? JSON.stringify(data) : '');
 };
 
 helpers.startServer = function (port) {
-  var token, router = new director.http.Router().configure({ 
+  var token, router = new director.http.Router().configure({
     strict: false,
     async: true
   });
-  
+
   router.get('/tests', function () {
     this.res.json(200, {}, { ok: true });
   });
-  
+
   router.post('/tests', function () {
     this.res.json(200, {}, this.req.body);
   });
-  
+
   router.post('/redirect', function () {
     this.res.json(302, { 'Location': 'http://localhost:8000/login' }, this.req.body);
   });
-  
+
   router.post('/upload', function () {
     this.res.json(200, {}, this.req.body);
   });
-  
+
   router.get('/login', function () {
     if (!token) {
       token = Math.floor(Math.random() * 100);
     }
-    
+
     this.res.json(200, {}, { token: token });
   });
-  
+
   router.before('/restricted', function (next) {
-    return parseInt(this.req.headers['x-test-authorized'], 10) !== token 
+    return parseInt(this.req.headers['x-test-authorized'], 10) !== token
       ? next(new director.http.NotAuthorized())
       : next();
   });
-  
+
   router.get('/restricted', function () {
     this.res.json(200, {}, { authorized: true });
   });
-    
+
   http.createServer(function (req, res) {
     req.body = '';
     req.on('data', function (chunk) { req.body += chunk });
@@ -118,12 +118,12 @@ helpers.startServer = function (port) {
 helpers.startFileEchoServer = function (port) {
   var formidable = require("formidable");
   var fs = require("fs");
-  
+
   http.createServer(function (request, response) {
     var form = new formidable.IncomingForm(),
         files = [],
         fields = [];
-        
+
     form.uploadDir = __dirname+"/uploads";
 
     form
