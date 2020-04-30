@@ -16,7 +16,7 @@
   "dependencies": {
     "request": "2.x.x",
     "vows": "0.8.x",
-    "qs": "~2.3.3"
+    "qs": "~6.9.3"
   },
   "devDependencies": {
     "director": "~1.2.3",
